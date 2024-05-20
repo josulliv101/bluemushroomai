@@ -1,5 +1,18 @@
+const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
 import Image from "next/image";
+
+const client = new SecretManagerServiceClient();
+
+async function accessSecret() {
+  const [version] = await client.accessSecretVersion({
+    name: "projects/bluemushroomapp/secrets/google-api-key/versions/latest",
+  });
+  const payload = version.payload.data.toString("utf8");
+  console.log(`Secret data: ${payload}`);
+}
+accessSecret();
 
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
