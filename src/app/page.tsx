@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import Image from "next/image";
 
 // Access your API key as an environment variable (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
 
 async function run() {
   // For text-only input, use the gemini-pro model
